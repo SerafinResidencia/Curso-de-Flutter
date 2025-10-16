@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat, Centrar Botón.
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_circle_outline_sharp),
         onPressed: () {
