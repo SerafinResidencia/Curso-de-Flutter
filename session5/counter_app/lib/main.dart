@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:counter_app/screens/home_screen.dart';
+
 void main() {
   runApp(const MyApp()); //Importación de material-dart
 }
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
     //widget hijo.
     return const MaterialApp(
       debugShowCheckedModeBanner: false, //quitar etiqueta de debug
-      home: Center(child: Text('Hola Mundo')),
-    ); //Widget hijo.
+      home: HomeScreen(),
+    ); //Widget hijo importado desde la segunda pantalla.
   }
 }
