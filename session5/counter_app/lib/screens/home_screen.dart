@@ -1,5 +1,4 @@
 //class HomeScreen {} // Esto es una clase.
-
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
