@@ -1,4 +1,3 @@
-import 'package:fl_componentes/screens/home_screen.dart';
 import 'package:fl_componentes/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +11,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       //home: Listview2Screen(),
-      initialRoute: 'home_screen',
+      initialRoute: 'home',
       routes: {
         'listview1': (BuildContext context) => const Listview1Screen(),
         'listview2': (BuildContext context) => const Listview2Screen(),
         'home': (BuildContext context) => const HomeScreen(),
+        'alert': (BuildContext context) => const AlertScreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings);
+
+        return MaterialPageRoute(builder: (context) => const AlertScreen());
       },
     );
   }
