@@ -11,7 +11,9 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) => ListTile(
           leading: Icon(Icons.accessibility_new_outlined),
           title: Text('Nombre de la Ruta'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, 'listview1');
+          },
         ),
         separatorBuilder: (_, __) => const Divider(),
         itemCount: 10,
