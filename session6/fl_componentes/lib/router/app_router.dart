@@ -42,7 +42,7 @@ class AppRoutes {
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};
     for (final option in menuOptions) {
-      appRoutes.addAll({option.name: (BuildContext context) => option.screen});
+      appRoutes.addAll({option.route: (BuildContext context) => option.screen});
     }
 
     return appRoutes;
