@@ -7,6 +7,15 @@ class InputsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();
+
+    final Map<String, String> formValues = {
+      'first_name': 'Sera',
+      'last_name': 'Martinez',
+      'email': 'sera@google.com',
+      'password': '',
+      'role': 'Admin',
+    };
+
     return Scaffold(
       appBar: AppBar(title: Text('Inputs y Fomrs')),
       body: SingleChildScrollView(
@@ -20,6 +29,8 @@ class InputsScreen extends StatelessWidget {
                   labelText: 'Nombre',
                   helperText: 'Solo letras',
                   hintText: 'Nombre del usuario',
+                  formProperty: 'first_name',
+                  formValues: formValues,
                   //counterText: 'Almenos 3 letras',
                 ),
                 SizedBox(height: 30),
@@ -28,6 +39,8 @@ class InputsScreen extends StatelessWidget {
                   labelText: 'Apellido',
                   helperText: 'Solo letras',
                   hintText: 'Apellido del usuario',
+                  formProperty: 'last_name',
+                  formValues: formValues,
                 ),
                 SizedBox(height: 30),
 
@@ -35,6 +48,8 @@ class InputsScreen extends StatelessWidget {
                   labelText: 'Correo',
                   hintText: 'Correo del usuario',
                   keyboardType: TextInputType.emailAddress,
+                  formProperty: 'email',
+                  formValues: formValues,
                 ),
                 SizedBox(height: 30),
 
@@ -43,6 +58,8 @@ class InputsScreen extends StatelessWidget {
                   hintText: 'Contraseña del usuario',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: true,
+                  formProperty: 'password',
+                  formValues: formValues,
                 ),
                 SizedBox(height: 30),
 
