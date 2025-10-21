@@ -21,9 +21,7 @@ class AvatarScreen extends StatelessWidget {
       body: const Center(
         child: CircleAvatar(
           maxRadius: 120,
-          backgroundImage: NetworkImage(
-            'https://i.blogs.es/85aa44/stan-lee/840_560.jpg',
-          ),
+          backgroundImage: AssetImage('assets/img/Stan.jpg'),
         ),
       ),
     );

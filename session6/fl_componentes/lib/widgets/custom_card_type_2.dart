@@ -9,28 +9,44 @@ class CustomCardType2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isNetwork = imageUrl.startsWith('http');
+
     return Card(
       clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 20,
-      shadowColor: AppTheme.primary,
+      shadowColor: AppTheme.primary.withValues(alpha: 0.4),
       child: Column(
         children: [
-          FadeInImage(
-            image: NetworkImage(imageUrl),
-            placeholder: const AssetImage('assets/jar-loading.gif'),
-            width: double.infinity,
-            height: 230,
-            fit: BoxFit.cover,
-            fadeInDuration: const Duration(milliseconds: 300),
-          ),
+          // ✅ Si la imagen es URL → usa FadeInImage con NetworkImage
+          // ✅ Si es local → usa directamente Image.asset
+          isNetwork
+              ? FadeInImage(
+                  image: NetworkImage(imageUrl),
+                  placeholder: const AssetImage('assets/jar-loading.gif'),
+                  width: double.infinity,
+                  height: 230,
+                  fit: BoxFit.cover,
+                  fadeInDuration: const Duration(milliseconds: 300),
+                )
+              : Image.asset(
+                  imageUrl,
+                  width: double.infinity,
+                  height: 230,
+                  fit: BoxFit.cover,
+                ),
+
           if (name != null)
             Container(
               alignment: AlignmentDirectional.centerEnd,
-              padding: EdgeInsets.only(right: 20, top: 10, bottom: 10),
-              child: Text(name!),
+              padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
+              child: Text(
+                name!,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
         ],
       ),

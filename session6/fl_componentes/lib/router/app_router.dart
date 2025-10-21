@@ -40,8 +40,14 @@ class AppRoutes {
     MenuOption(
       route: 'avatar',
       icon: Icons.supervised_user_circle_outlined,
-      name: 'Avatar',
+      name: 'Circle Avatar',
       screen: AvatarScreen(),
+    ),
+    MenuOption(
+      route: 'animated',
+      icon: Icons.animation_outlined,
+      name: 'Animated Container',
+      screen: AnimatedScreen(),
     ),
   ];
 
