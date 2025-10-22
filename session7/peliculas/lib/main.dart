@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: 'home',
       routes: {'home': (_) => HomeScreen(), 'details': (_) => DetailsScreen()},
+      theme: ThemeData.light().copyWith(
+        appBarTheme: AppBarTheme(backgroundColor: Colors.indigo),
+      ),
     );
   }
 }
