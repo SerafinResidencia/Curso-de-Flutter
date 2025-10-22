@@ -6,3 +6,4 @@ export 'package:fl_componentes/screens/home_screen.dart';
 export 'package:fl_componentes/screens/inputs_screen.dart';
 export 'package:fl_componentes/screens/listview1_screen.dart';
 export 'package:fl_componentes/screens/listview2_screen.dart';
+export 'package:fl_componentes/screens/slider_screen.dart';

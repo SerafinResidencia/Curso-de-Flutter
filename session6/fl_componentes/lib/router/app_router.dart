@@ -49,6 +49,12 @@ class AppRoutes {
       name: 'Text Inputs',
       screen: InputsScreen(),
     ),
+    MenuOption(
+      route: 'slider',
+      icon: Icons.slow_motion_video_sharp,
+      name: 'Slider & Checks',
+      screen: SliderScreen(),
+    ),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

@@ -35,7 +35,7 @@ class _AnimatedScreenState extends State<AnimatedScreen> {
       appBar: AppBar(title: const Text('Animated container ')),
       body: Center(
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 100),
           curve: Curves.easeInCubic,
           width: _width,
           height: _height,

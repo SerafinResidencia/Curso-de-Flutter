@@ -13,7 +13,7 @@ class AppTheme {
     //TextButton Theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: const Color.fromARGB(255, 120, 63, 181),
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
     ),
 
@@ -25,7 +25,7 @@ class AppTheme {
     //Elevation Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color.fromARGB(255, 248, 248, 248),
         shape: const StadiumBorder(),
         elevation: 0,
       ),
