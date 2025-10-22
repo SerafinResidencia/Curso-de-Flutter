@@ -34,12 +34,30 @@ class _ListviewBuilderScreenState extends State<ListviewBuilderScreen> {
     add5();
     isLoading = false;
     setState(() {});
+
+    if (scrollController.position.pixels * 100 <=
+        scrollController.position.maxScrollExtent) {
+      return;
+    }
+    scrollController.animateTo(
+      scrollController.position.pixels * 120,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   void add5() {
     final lastId = imagenesIds.last;
     imagenesIds.addAll([1, 2, 3, 4, 5].map((e) => lastId + e));
     setState(() {});
+  }
+
+  Future<void> onRefresh() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final lastId = imagenesIds.last;
+    imagenesIds.clear();
+    imagenesIds.add(lastId + 1);
+    add5();
   }
 
   @override
@@ -53,28 +71,31 @@ class _ListviewBuilderScreenState extends State<ListviewBuilderScreen> {
         removeBottom: true,
         child: Stack(
           children: [
-            ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              controller: scrollController,
-              itemCount: imagenesIds.length,
-              itemBuilder: (BuildContext context, int index) {
-                return FadeInImage(
-                  width: double.infinity,
-                  height: 300,
-                  fit: BoxFit.cover,
-                  placeholder: const AssetImage('assets/jar-loading.gif'),
-                  image: NetworkImage(
-                    'https://picsum.photos/500/300?random=${imagenesIds[index]}',
-                  ),
-                );
-              },
+            RefreshIndicator(
+              onRefresh: onRefresh,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                controller: scrollController,
+                itemCount: imagenesIds.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return FadeInImage(
+                    width: double.infinity,
+                    height: 300,
+                    fit: BoxFit.cover,
+                    placeholder: const AssetImage('assets/jar-loading.gif'),
+                    image: NetworkImage(
+                      'https://picsum.photos/500/300?random=${imagenesIds[index]}',
+                    ),
+                  );
+                },
+              ),
             ),
-
-            Positioned(
-              bottom: 40,
-              left: size.width * 0.5 - 30,
-              child: const _LoadingIcon(),
-            ),
+            if (isLoading)
+              Positioned(
+                bottom: 40,
+                left: size.width * 0.5 - 30,
+                child: const _LoadingIcon(),
+              ),
           ],
         ),
       ),
@@ -83,7 +104,7 @@ class _ListviewBuilderScreenState extends State<ListviewBuilderScreen> {
 }
 
 class _LoadingIcon extends StatelessWidget {
-  const _LoadingIcon({super.key});
+  const _LoadingIcon();
 
   @override
   Widget build(BuildContext context) {
