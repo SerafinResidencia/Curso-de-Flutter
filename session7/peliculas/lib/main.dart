@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'screens/screens.dart';
 
 void main() {
-  runApp(const MyApp());
+  debugPrint('💡 main() ejecutado');
+  runApp(const AppState());
 }
 
 class AppState extends StatelessWidget {

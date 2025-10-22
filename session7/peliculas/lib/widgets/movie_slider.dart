@@ -36,24 +36,26 @@ class _MoviePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 130,
-      height: 190,
+      height: 190, // altura total del poster
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(
-              context,
-              'details',
-              arguments: 'movie-instance',
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage('https://picsum.photos/300/400'),
-                width: 130,
-                height: 190,
-                fit: BoxFit.cover,
+          Expanded(
+            // <- esto fuerza a que la imagen ocupe el espacio disponible
+            child: GestureDetector(
+              onTap: () => Navigator.pushNamed(
+                context,
+                'details',
+                arguments: 'movie-instance',
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage('https://picsum.photos/300/400'),
+                  width: 130,
+                  fit: BoxFit.cover, // mantiene proporción y ajusta la altura
+                ),
               ),
             ),
           ),
