@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -16,8 +17,12 @@ class DetailsScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               const _PosterAndTitle(),
-              const SizedBox(height: 50),
-              Center(child: Text('Hola $movie')),
+              _Overview(),
+              _Overview(),
+              _Overview(),
+              _Overview(),
+              _Overview(),
+              CastingCards(),
             ]),
           ),
         ],
@@ -117,6 +122,20 @@ class _PosterAndTitle extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text(
+        'Nisi deserunt magna eiusmod magna nulla ipsum do duis ea consectetur dolore commodo veniam.',
+        textAlign: TextAlign.justify,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }
