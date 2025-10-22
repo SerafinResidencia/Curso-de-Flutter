@@ -13,7 +13,7 @@ class AppTheme {
     //TextButton Theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        foregroundColor: Colors.white, // color del texto,
       ),
     ),
 
@@ -25,7 +25,8 @@ class AppTheme {
     //Elevation Buttons
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+        backgroundColor: const Color.fromARGB(255, 126, 136, 193),
+        foregroundColor: Colors.white, // ← color del texto
         shape: const StadiumBorder(),
         elevation: 0,
       ),
@@ -33,7 +34,7 @@ class AppTheme {
 
     //Decoration de Border de Forms
     inputDecorationTheme: const InputDecorationTheme(
-      floatingLabelStyle: TextStyle(color: primary),
+      floatingLabelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
 
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: primary),

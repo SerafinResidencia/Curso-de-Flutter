@@ -23,13 +23,14 @@ class AlertScreen extends StatelessWidget {
           ),
           actions: [
             TextButton(
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
               onPressed: () => Navigator.pop(context),
-              child: const Text(
-                'Cancelar',
-                style: TextStyle(color: Colors.red),
-              ),
+              child: const Text('Cancelar'),
             ),
             TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color.fromARGB(255, 11, 11, 11),
+              ),
               onPressed: () => Navigator.pop(context),
               child: const Text('Ok'),
             ),
