@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:peliculas/models/models.dart';
 
 class MoviesProvider extends ChangeNotifier {
   final String _apiKey =
@@ -33,10 +34,11 @@ class MoviesProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       print('✅ Datos recibidos:');
       print(response.body);
+      final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
+      print(nowPlayingResponse.results[0].title);
     } else {
       print('❌ Error: ${response.statusCode}');
       final Map<String, dynamic> decodedData = json.decode(response.body);
-      print(decodedData['dates']);
     }
   }
 }
