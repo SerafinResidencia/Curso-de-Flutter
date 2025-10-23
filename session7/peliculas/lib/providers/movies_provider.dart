@@ -10,6 +10,7 @@ class MoviesProvider extends ChangeNotifier {
   final String _accepted = 'application/json';
   final String _baseUrl = 'api.themoviedb.org';
   final _language = "es-ES";
+  List<Movie> onDisplayMovies = [];
 
   MoviesProvider() {
     debugPrint('✅ MoviesProvider inicializado');
@@ -36,9 +37,11 @@ class MoviesProvider extends ChangeNotifier {
       print(response.body);
       final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
       print(nowPlayingResponse.results[0].title);
+      onDisplayMovies = nowPlayingResponse.results;
+      notifyListeners();
     } else {
       print('❌ Error: ${response.statusCode}');
-      final Map<String, dynamic> decodedData = json.decode(response.body);
+      json.decode(response.body);
     }
   }
 }

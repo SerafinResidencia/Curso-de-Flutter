@@ -7,8 +7,6 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Cambiar por una instancia de movie
-    final String movie =
-        ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-movie';
 
     return Scaffold(
       body: CustomScrollView(
