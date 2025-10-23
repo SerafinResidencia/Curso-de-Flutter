@@ -11,11 +11,13 @@ class MoviesProvider extends ChangeNotifier {
   final String _baseUrl = 'api.themoviedb.org';
   final _language = "es-ES";
   List<Movie> onDisplayMovies = [];
+  List<Movie> popularMovies = [];
 
   MoviesProvider() {
     debugPrint('✅ MoviesProvider inicializado');
 
-    this.getOnDisplayMovies();
+    getOnDisplayMovies();
+    getPopularMovies();
   }
 
   getOnDisplayMovies() async {
@@ -39,9 +41,30 @@ class MoviesProvider extends ChangeNotifier {
       print(nowPlayingResponse.results[0].title);
       onDisplayMovies = nowPlayingResponse.results;
       notifyListeners();
-    } else {
-      print('❌ Error: ${response.statusCode}');
-      json.decode(response.body);
+    }
+  }
+
+  getPopularMovies() async {
+    var url = Uri.https(_baseUrl, '3/movie/popular', {
+      'language': _language,
+      'page': '1',
+    });
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': _apiKey, // Bearer token en headers
+        'accept': _accepted,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('✅ Datos recibidos:');
+      print(response.body);
+      final popularResponse = PopularResponse.fromJson(response.body);
+      popularMovies = [...popularResponse.results];
+      print(popularMovies[0]);
+      notifyListeners();
     }
   }
 }
