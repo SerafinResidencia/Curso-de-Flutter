@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-class PopularResponse {
+class CreditsResponse {
   int id;
   List<Cast> cast;
   List<Cast> crew;
 
-  PopularResponse({required this.id, required this.cast, required this.crew});
+  CreditsResponse({required this.id, required this.cast, required this.crew});
 
-  factory PopularResponse.fromJson(String str) =>
-      PopularResponse.fromMap(json.decode(str));
+  factory CreditsResponse.fromJson(String str) =>
+      CreditsResponse.fromMap(json.decode(str));
 
-  factory PopularResponse.fromMap(Map<String, dynamic> json) => PopularResponse(
+  factory CreditsResponse.fromMap(Map<String, dynamic> json) => CreditsResponse(
     id: json["id"],
     cast: List<Cast>.from(json["cast"].map((x) => Cast.fromMap(x))),
     crew: List<Cast>.from(json["crew"].map((x) => Cast.fromMap(x))),
