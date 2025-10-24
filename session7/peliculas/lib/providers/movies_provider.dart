@@ -34,6 +34,8 @@ class MoviesProvider extends ChangeNotifier {
         'accept': _accepted,
       },
     );
+    print('🌐 Solicitando: $url');
+    print(response);
     //print('✅ Datos recibidos:');
     //print(response.body);
     return response.body;
@@ -58,7 +60,12 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   Future<List<Cast>> getMovieCast(int movieId) async {
+    print('PIDIENDO CAST AL SERVIDOR');
+
+    if (moviesCast.containsKey(movieId)) return moviesCast[movieId]!;
+    print('🎬 movieId recibido: $movieId');
     final jsonData = await _getJsonData('3/movie/$movieId/credits');
+    print('📦 JSON recibido: $jsonData');
     final creditsResponse = CreditsResponse.fromJson(jsonData);
     moviesCast[movieId] = creditsResponse.cast;
     return creditsResponse.cast;
