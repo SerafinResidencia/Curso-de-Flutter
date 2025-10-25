@@ -27,14 +27,8 @@ class MovieSearchDelegate extends SearchDelegate {
   }
 
   Widget _empyContainer() {
-    return Container(
-      child: Center(
-        child: Icon(
-          Icons.movie_filter_rounded,
-          color: Colors.black38,
-          size: 130,
-        ),
-      ),
+    return Center(
+      child: Icon(Icons.movie_filter_rounded, color: Colors.black38, size: 130),
     );
   }
 
@@ -45,8 +39,10 @@ class MovieSearchDelegate extends SearchDelegate {
     }
 
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
-    return FutureBuilder(
-      future: moviesProvider.searchMovies(query),
+    moviesProvider.getSuggestionsByQuery(query);
+
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
       builder: (_, AsyncSnapshot snapshot) {
         if (!snapshot.hasData) return _empyContainer();
         final movies = snapshot.data;
@@ -62,7 +58,7 @@ class MovieSearchDelegate extends SearchDelegate {
 class _MovieItem extends StatelessWidget {
   final Movie movie;
 
-  const _MovieItem({super.key, required this.movie});
+  const _MovieItem({required this.movie});
   @override
   Widget build(BuildContext context) {
     movie.heroId = 'search-${movie.id}';
