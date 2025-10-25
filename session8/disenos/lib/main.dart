@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       initialRoute: 'basic_route',
-      routes: {'basic_desing': (_) => BasicDesingScreen()},
+      routes: {'basic_route': (_) => BasicDesingScreen()},
     );
   }
 }
