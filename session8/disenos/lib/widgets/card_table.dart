@@ -85,27 +85,28 @@ class _SingleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return _CardBackground(child:  Column(
-      mainAxisAlignment: MainAxisAlignment.center, // Centra verticalmente
-      crossAxisAlignment: CrossAxisAlignment.center, // Centra horizontalmente
-      children: [
-        CircleAvatar(
-          backgroundColor: color,
-          radius: 30,
-          child: Icon(icon, color: Colors.white, size: 30),
-        ),
-        const SizedBox(height: 15),
-        Text(
-          text,
-          style: TextStyle(
-            color: color,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+    return _CardBackground(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center, // Centra verticalmente
+        crossAxisAlignment: CrossAxisAlignment.center, // Centra horizontalmente
+        children: [
+          CircleAvatar(
+            backgroundColor: color,
+            radius: 30,
+            child: Icon(icon, color: Colors.white, size: 30),
           ),
-        ),
-      ],
-    ););
+          const SizedBox(height: 15),
+          Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
