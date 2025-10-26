@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CardTable extends StatelessWidget {
@@ -25,7 +27,7 @@ class CardTable extends StatelessWidget {
         TableRow(
           children: [
             _SingleCard(
-              color: const Color.fromARGB(255, 33, 243, 82),
+              color: const Color.fromARGB(255, 37, 184, 71),
               icon: Icons.car_rental_rounded,
               text: 'Automovil',
             ),
@@ -45,7 +47,7 @@ class CardTable extends StatelessWidget {
             ),
             _SingleCard(
               icon: Icons.house_sharp,
-              color: const Color.fromARGB(255, 24, 28, 255),
+              color: const Color.fromARGB(255, 24, 220, 255),
               text: 'Casas',
             ),
           ],
@@ -83,23 +85,52 @@ class _SingleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15),
-      height: 180,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(42, 106, 1, 235),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: color,
-            radius: 30,
-            child: Icon(icon, color: Colors.white),
+
+    return _CardBackground(child:  Column(
+      mainAxisAlignment: MainAxisAlignment.center, // Centra verticalmente
+      crossAxisAlignment: CrossAxisAlignment.center, // Centra horizontalmente
+      children: [
+        CircleAvatar(
+          backgroundColor: color,
+          radius: 30,
+          child: Icon(icon, color: Colors.white, size: 30),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          text,
+          style: TextStyle(
+            color: color,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
           ),
-          SizedBox(height: 10),
-          Text(text, style: TextStyle(color: color, fontSize: 18)),
-        ],
+        ),
+      ],
+    ););
+  }
+}
+
+class _CardBackground extends StatelessWidget {
+  final Widget child;
+
+  const _CardBackground({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(15),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Container(
+            height: 180,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(42, 106, 1, 235),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: child,
+          ),
+        ),
       ),
     );
   }
