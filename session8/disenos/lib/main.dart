@@ -1,4 +1,5 @@
 import 'package:disenos/screens/basic_desing.dart';
+import 'package:disenos/screens/home_screen.dart';
 import 'package:disenos/screens/scroll_desing.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      initialRoute: 'scroll_route',
+      initialRoute: 'home_route',
       routes: {
         'basic_route': (_) => BasicDesingScreen(),
         'scroll_route': (_) => ScrollScreen(),
+        'home_route': (_) => HomeScreen(),
       },
     );
   }
