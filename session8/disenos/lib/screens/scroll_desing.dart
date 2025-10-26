@@ -28,11 +28,26 @@ class MainContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [Text('Hola')],
+    final textStyle = TextStyle(
+      fontSize: 60,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    );
+
+    return SafeArea(
+      bottom: false,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 30),
+          Text('11 °C', style: textStyle),
+          Text('Miércoles', style: textStyle),
+          Expanded(child: Container()),
+          Icon(Icons.arrow_downward_sharp, size: 100, color: Colors.white),
+        ],
+      ),
     );
   }
 }
-//147. Diseño con scroll - parte 1
+//
