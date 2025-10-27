@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
@@ -54,6 +56,7 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           TextFormField(
@@ -64,6 +67,14 @@ class _LoginForm extends StatelessWidget {
               labelText: 'Correo electrónico',
               prefix: Icons.alternate_email_outlined,
             ),
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = new RegExp(pattern);
+              return regExp.hasMatch(value ?? '')
+                  ? null
+                  : 'El correo ingresado es inválido';
+            },
           ),
           const SizedBox(height: 30),
           TextFormField(
@@ -74,6 +85,11 @@ class _LoginForm extends StatelessWidget {
               labelText: 'Contraseña',
               prefix: Icons.lock_person_sharp,
             ),
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : 'La contraseña debe de tener almenos 6 carácteres';
+            },
           ),
           const SizedBox(height: 30),
           MaterialButton(
