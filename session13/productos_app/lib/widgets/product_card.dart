@@ -45,7 +45,7 @@ class _NotAvailable extends StatelessWidget {
       width: 100,
       height: 70,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 249, 231, 37),
+        color: const Color.fromARGB(255, 249, 192, 37),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),
           bottomRight: Radius.circular(25),

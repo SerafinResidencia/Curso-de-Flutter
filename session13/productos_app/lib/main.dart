@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Productos App',
       initialRoute: 'home',
-      routes: {'login': (_) => LoginScreen(), 'home': (_) => HomeScreen()},
+      routes: {
+        'login': (_) => LoginScreen(),
+        'home': (_) => HomeScreen(),
+        'product': (_) => ProductScreen(),
+      },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
         appBarTheme: AppBarTheme(elevation: 0, backgroundColor: Colors.indigo),
