@@ -18,35 +18,40 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: SafeArea(
             child: SizedBox(
-              height: size.height, // 🔹 limita la altura al tamaño de pantalla
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 250),
-                  CardContainer(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        Text(
-                          'Login',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        const SizedBox(height: 30),
-
-                        ChangeNotifierProvider(
-                          create: (_) => LoginFormProvider(),
-                          child: _LoginForm(),
-                        ),
-                      ],
+              height: size.height,
+              child: ChangeNotifierProvider(
+                create: (_) => LoginFormProvider(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 250),
+                    CardContainer(
+                      child: Column(
+                        children: const [
+                          SizedBox(height: 10),
+                          Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          _LoginForm(),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 50),
-                  const Text(
-                    'Crear una nueva cuenta',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 50),
-                ],
+                    const SizedBox(height: 50),
+                    const Text(
+                      'Crear una nueva cuenta',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                  ],
+                ),
               ),
             ),
           ),
@@ -108,19 +113,32 @@ class _LoginForm extends StatelessWidget {
             disabledColor: Colors.grey,
             elevation: 0,
             color: Colors.deepPurple,
+
+            onPressed: loginForm.isLoading
+                ? null
+                : () async {
+                    FocusScope.of(context).unfocus(); // Oculta el teclado
+                    if (!loginForm.isValidForm()) return;
+
+                    loginForm.isLoading = true;
+
+                    // Simula carga
+                    await Future.delayed(const Duration(seconds: 2));
+
+                    // Una vez pasado el tiempo, vuelve a activar el botón
+                    loginForm.isLoading = false;
+                    if (!context.mounted) return;
+                    // Navega a la pantalla home
+                    Navigator.pushReplacementNamed(context, 'home');
+                  },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              child: const Text(
-                'Ingresar',
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                loginForm.isLoading ? 'Espere' : 'Ingresar',
+
+                style: const TextStyle(color: Colors.white),
               ),
             ),
-            onPressed: () {
-              FocusScope.of(context).unfocus(); // Oculta el teclado
-              if (!loginForm.isValidForm()) return; // ✅ Valida correctamente
-              // Aquí puedes continuar con el login
-              print('Formulario válido');
-            },
           ),
         ],
       ),
