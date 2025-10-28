@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({super.key});
+  const ProductImage({super.key, this.url});
+  final String? url;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +17,17 @@ class ProductImage extends StatelessWidget {
             topLeft: Radius.circular(45),
             topRight: Radius.circular(45),
           ),
-          child: FadeInImage(
-            placeholder: NetworkImage(
-              'https://via.placeholder.com/400x300/green',
-            ),
-            image: AssetImage('assets/jar-loading.gif'),
-            fit: BoxFit.cover,
-          ),
+
+          child: url == null
+              ? Image.asset(
+                  'assets/no-image.png', // placeholder local en caso de null
+                  fit: BoxFit.cover,
+                )
+              : FadeInImage(
+                  placeholder: AssetImage('assets/jar-loading.gif'),
+                  image: NetworkImage(url!), // ✅ URL de internet
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
     );
