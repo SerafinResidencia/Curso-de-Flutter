@@ -8,7 +8,29 @@ class ProductFormProvider extends ChangeNotifier {
 
   ProductFormProvider(this.product);
 
+  updateAvailability(bool value) {
+    print(value);
+    product.available = value;
+    notifyListeners();
+  }
+
   bool isValidForm() {
-    return formKey.currentState?.validate() ?? false;
+    // Dispara las validaciones
+    final isValid = formKey.currentState?.validate() ?? false;
+
+    if (!isValid) {
+      print('Formulario inválido');
+      return false;
+    }
+
+    // Guarda los valores si tienes onSaved en los TextFormFields
+    formKey.currentState?.save();
+
+    print('--- PRODUCTO ---');
+    print('Nombre: ${product.name}');
+    print('Precio: ${product.price}');
+    print('Disponible: ${product.available}');
+
+    return true;
   }
 }
