@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.white),
         onPressed: () {
           productsService.selectedProduct = Product(
             available: false,

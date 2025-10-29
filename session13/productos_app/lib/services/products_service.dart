@@ -105,8 +105,7 @@ class ProductsService extends ChangeNotifier {
 
   void updateSelectedProductImage(String path) {
     selectedProduct.picture = path;
-    newPictureFile = File.fromUri(Uri(path: path));
-
+    newPictureFile = File(path);
     notifyListeners();
   }
 
@@ -133,21 +132,21 @@ class ProductsService extends ChangeNotifier {
       final resp = await http.Response.fromStream(streamResponse);
 
       if (resp.statusCode != 200 && resp.statusCode != 201) {
-        print('❌ Error al subir imagen');
+        print(' Error al subir imagen');
         print(resp.body);
         return null;
       }
 
       final decodedData = json.decode(resp.body);
       final secureUrl = decodedData['secure_url'] as String;
-      print('✅ Imagen subida con éxito: $secureUrl');
+      print(' Imagen subida con éxito: $secureUrl');
 
       // Guarda la URL directamente en tu producto actual
       selectedProduct.picture = secureUrl;
 
       return secureUrl;
     } catch (e) {
-      print('⚠️ Error en uploadImage: $e');
+      print(' Error en uploadImage: $e');
       return null;
     } finally {
       newPictureFile = null;
