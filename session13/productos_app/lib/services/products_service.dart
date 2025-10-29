@@ -48,6 +48,7 @@ class ProductsService extends ChangeNotifier {
     isSaving = true;
     notifyListeners();
     if (product.id == null) {
+      await createProduct(product);
       //Es necesario crear.
     } else {
       //Actualizar
@@ -59,13 +60,43 @@ class ProductsService extends ChangeNotifier {
   }
 
   Future<String> updateProduct(Product product) async {
-    final url = Uri.https(_baseUrl, 'products/${product.id}.json');
-    final resp = await http.put(url, body: product.toJson());
-    final decodedData = resp.body;
-    print(decodedData);
+    // Verifica que el producto tenga ID
+    if (product.id == null) {
+      throw Exception('El producto no tiene un ID válido para actualizar.');
+    }
 
-    final index = products.indexWhere((element) => element.id == product.id);
-    products[index] = product;
+    final url = Uri.https(_baseUrl, 'products/${product.id}.json');
+
+    final resp = await http.put(url, body: product.toJson());
+
+    // Si la respuesta no fue exitosa, lanza error
+    if (resp.statusCode != 200) {
+      throw Exception('Error al actualizar el producto: ${resp.body}');
+    }
+
+    final decodedData = json.decode(resp.body);
+    print('Producto actualizado: $decodedData');
+
+    // Busca el producto en la lista y actualízalo
+    final index = products.indexWhere((p) => p.id == product.id);
+    if (index >= 0) {
+      products[index] = product;
+      notifyListeners(); // 🔔 notifica cambios a los widgets
+    }
+
+    return product.id!;
+  }
+
+  Future<String> createProduct(Product product) async {
+    final url = Uri.https(_baseUrl, 'products.json'); // sin product.id
+    final resp = await http.post(url, body: product.toJson());
+
+    final decodedData = json.decode(resp.body);
+    print(decodedData); // { "name": "-OchvFRd9Vpa225yaLfS" }
+
+    product.id = decodedData['name']; //  Guarda el ID generado por Firebase
+    products.add(product);
+
     return product.id!;
   }
 }
