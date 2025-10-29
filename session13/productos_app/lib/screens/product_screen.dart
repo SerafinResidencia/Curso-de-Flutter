@@ -89,10 +89,13 @@ class _ProductScreenBody extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.save_as_rounded),
-        onPressed: () {
+        onPressed: () async {
           print('Botón presionado');
           if (!produtcForm.isValidForm()) return;
           print('Formulario válido, guardando...');
+
+          final String? imageUrl = await productService.uploadImage();
+          print(imageUrl);
           productService.saveOrCreateProduct(produtcForm.product);
         },
       ),
